@@ -1,0 +1,24 @@
+services:
+  db_main:
+    image: postgres:17
+    container_name: db-main
+    command: ["postgres", "-p", "5433"]
+    ports:
+      - "5433:5433"
+    networks:
+      - maindb-network
+    environment:
+      POSTGRES_DB: supermarket
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - main_db_volumes:/var/lib/postgresql/data
+      - ./dump-supermarket.sql:/docker-entrypoint-initdb.d/dump-supermarket.sql
+
+volumes:
+  main_db_volumes:
+
+networks:
+  maindb-network:
+    name: maindb_network
+    driver: bridge
