@@ -19,10 +19,10 @@ The project is divided into three core tasks:
 
 There are two separate Docker Compose files created in this project, as described below:
 
- 1. **'airflow'** - Handles the orchestration and scheduling of data pipelines.
- 2. **'postgres'** - Acts as the local database for data extraction.
+ 1. **`airflow`** - Handles the orchestration and scheduling of data pipelines.
+ 2. **`postgres`** - Acts as the local database for data extraction.
 
- Both services are built separately to simulate a real-world scenario where each tool runs on a different machine or environment. They are connected through a **Docker Networks** named **'maindb_network'**, which enables communication between the containers.
+ Both services are built separately to simulate a real-world scenario where each tool runs on a different machine or environment. They are connected through a **Docker Networks** named **`maindb_network`**, which enables communication between the containers.
  Since the network is hosted by the PostgreSQL service, it must be started **before** the Airflow service.
 
 To launch all Docker Compose services at once, go to the project directory and execute these commands in the given order:
@@ -39,13 +39,13 @@ docker compose -f postgres/docker-compose.yaml down
 
 ### **Apache Airflow** – Workflow orchestration for automated data pipelines.
 
-Once all Docker services are up and running, you can access the **Airflow Webserver** through your web browser at **'localhost:8080'**.
+Once all Docker services are up and running, you can access the **Airflow Webserver** through your web browser at **`localhost:8080`**.
 
-When prompted for credentials, use the username and password defined in the **Airflow** **'docker-compose.yaml'** file.
+When prompted for credentials, use the username and password defined in the **Airflow** **`docker-compose.yaml`** file.
 By default, they are set as:
 
-- Username: **'airflow'**
-- Password: **'airflow'**
+- Username: **`airflow`**
+- Password: **`airflow`**
 
 After logging in, you’ll land on the **Airflow Dashboard**, where you can see all available **DAGs** ready to be executed, as shown below:
 
@@ -58,6 +58,34 @@ Similarly, to **pause or stop** a DAG, simply click the **same toggle** button o
 
 You can **monitor DAGs** by clicking on a DAG name and selecting a specific **run instance** to view detailed logs and task progress.
 
-- **PostgreSQL** – Local database used as the data source. 
-- **Google BigQuery** – Cloud data warehouse for transformed and analytical-ready data.
+### **PostgreSQL** – Local database used as the data source.
 
+Dummy datasets were created as part of the Technical Test requirements, consisting of **customers**, **products**, **transactions**, **transaction_items**, and **marketing_campaigns** tables.
+The data was generated using Mockaroo
+ and a custom **Python data generator** to simulate a real-world supermarket use case.
+
+A **`dump-supermarket.sql`** file was created to automatically populate the database with sample data each time the PostgreSQL container is started through Docker Compose.
+
+The data pipeline built for this project simulates the process of **ingesting data from an OLTP database (PostgreSQL)** which handles real-time transactions into an **OLAP database (BigQuery)** designed for analytical workloads.
+
+The ingestion workflow consists of three main steps:
+1. *Extract* data from PostgreSQL and store it temporarily as a CSV file.
+2. **Check or create** the corresponding dataset in BigQuery.
+3. **Load** the data from the temporary file into **staging tables** in BigQuery.
+
+Finally, the pipeline performs **UPSERT** operations (**using BigQuery MERGE queries**) to load data into the production **tables**, ensuring no duplicate records exist in the analytical layer.
+
+### **Google BigQuery** – Cloud data warehouse for transformed and analytical-ready data.
+
+Once the data is successfully ingested from PostgreSQL into the **staging tables** in BigQuery, the next step is the **transformation process**.
+This step converts raw transactional data into **a dimensional model (Star Schema)** a structure designed to optimize analytical queries and reporting performance.
+
+The transformation process creates one **fact table** and several **dimension tables**, as follows:
+- fact_sales
+- dim_customers
+- dim_products
+- dim_dates
+- dim_campaigns
+Below is the **Entity Relationship Diagram (ERD)** that illustrates the relationship between the fact and dimension tables:
+
+<img src=''>
