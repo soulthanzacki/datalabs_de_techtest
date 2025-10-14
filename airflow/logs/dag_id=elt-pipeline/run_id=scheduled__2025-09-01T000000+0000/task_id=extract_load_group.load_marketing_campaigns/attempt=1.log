@@ -1,0 +1,388 @@
+[2025-10-13T08:36:37.491+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T08:36:37.518+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:36:37.529+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:36:37.530+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T08:36:37.546+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T08:36:37.554+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=152) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T08:36:37.556+0000] {standard_task_runner.py:72} INFO - Started process 158 to run task
+[2025-10-13T08:36:37.556+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmptjtlla_3']
+[2025-10-13T08:36:37.558+0000] {standard_task_runner.py:105} INFO - Job 12: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T08:36:37.626+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T08:36:37.723+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T08:36:37.725+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T08:36:41.014+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 2599, in load_table_from_file
+    response = self._do_resumable_upload(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 3019, in _do_resumable_upload
+    upload, transport = self._initiate_resumable_upload(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 3088, in _initiate_resumable_upload
+    upload.initiate(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/upload.py", line 420, in initiate
+    return _request_helpers.wait_and_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/_request_helpers.py", line 155, in wait_and_retry
+    response = func()
+               ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/upload.py", line 416, in retriable_request
+    self._process_initiate_response(result)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/_upload.py", line 518, in _process_initiate_response
+    _helpers.require_status_code(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/_helpers.py", line 108, in require_status_code
+    raise common.InvalidResponse(
+google.resumable_media.common.InvalidResponse: ('Request failed with status code', 403, 'Expected one of', 200, 201)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scripts/load.py", line 22, in load
+    job = client.load_table_from_file(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 2607, in load_table_from_file
+    raise exceptions.from_http_response(exc.response)
+google.api_core.exceptions.Forbidden: 403 POST https://bigquery.googleapis.com/upload/bigquery/v2/projects/gcpl-469311/jobs?uploadType=resumable: Access Denied: Project gcpl-469311: User does not have bigquery.jobs.create permission in project gcpl-469311.
+[2025-10-13T08:36:41.035+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T083637, end_date=20251013T083641
+[2025-10-13T08:36:41.050+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T08:36:41.051+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 12 for task extract_load_group.load_marketing_campaigns (403 POST https://bigquery.googleapis.com/upload/bigquery/v2/projects/gcpl-469311/jobs?uploadType=resumable: Access Denied: Project gcpl-469311: User does not have bigquery.jobs.create permission in project gcpl-469311.; 158)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 2599, in load_table_from_file
+    response = self._do_resumable_upload(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 3019, in _do_resumable_upload
+    upload, transport = self._initiate_resumable_upload(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 3088, in _initiate_resumable_upload
+    upload.initiate(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/upload.py", line 420, in initiate
+    return _request_helpers.wait_and_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/_request_helpers.py", line 155, in wait_and_retry
+    response = func()
+               ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/requests/upload.py", line 416, in retriable_request
+    self._process_initiate_response(result)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/_upload.py", line 518, in _process_initiate_response
+    _helpers.require_status_code(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/resumable_media/_helpers.py", line 108, in require_status_code
+    raise common.InvalidResponse(
+google.resumable_media.common.InvalidResponse: ('Request failed with status code', 403, 'Expected one of', 200, 201)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scripts/load.py", line 22, in load
+    job = client.load_table_from_file(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 2607, in load_table_from_file
+    raise exceptions.from_http_response(exc.response)
+google.api_core.exceptions.Forbidden: 403 POST https://bigquery.googleapis.com/upload/bigquery/v2/projects/gcpl-469311/jobs?uploadType=resumable: Access Denied: Project gcpl-469311: User does not have bigquery.jobs.create permission in project gcpl-469311.
+[2025-10-13T08:36:41.104+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-10-13T08:36:41.117+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-13T08:44:45.214+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T08:44:45.239+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:44:45.249+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:44:45.249+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T08:44:45.265+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T08:44:45.273+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=499) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T08:44:45.275+0000] {standard_task_runner.py:72} INFO - Started process 507 to run task
+[2025-10-13T08:44:45.276+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '82', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp80omtnxr']
+[2025-10-13T08:44:45.278+0000] {standard_task_runner.py:105} INFO - Job 82: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T08:44:45.350+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T08:44:45.450+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T08:44:45.451+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T08:44:57.795+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-13T08:44:57.796+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T08:44:57.810+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T08:44:57.810+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T084445, end_date=20251013T084457
+[2025-10-13T08:44:57.856+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T08:44:57.879+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T08:44:57.881+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-13T08:54:00.974+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T08:54:01.000+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:54:01.009+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T08:54:01.010+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T08:54:01.026+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T08:54:01.032+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=690) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T08:54:01.034+0000] {standard_task_runner.py:72} INFO - Started process 694 to run task
+[2025-10-13T08:54:01.035+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '99', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpy1azrfr7']
+[2025-10-13T08:54:01.036+0000] {standard_task_runner.py:105} INFO - Job 99: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T08:54:01.095+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T08:54:01.191+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T08:54:01.193+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T08:54:13.770+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-13T08:54:13.771+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T08:54:13.785+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T08:54:13.786+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T085401, end_date=20251013T085413
+[2025-10-13T08:54:13.822+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T08:54:13.846+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T08:54:13.848+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-13T09:05:36.773+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T09:05:36.796+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:05:36.806+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:05:36.806+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T09:05:36.822+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T09:05:36.831+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1022) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T09:05:36.833+0000] {standard_task_runner.py:72} INFO - Started process 1028 to run task
+[2025-10-13T09:05:36.834+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '149', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpli05jpr8']
+[2025-10-13T09:05:36.836+0000] {standard_task_runner.py:105} INFO - Job 149: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T09:05:36.899+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T09:05:36.992+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T09:05:36.993+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T09:05:41.356+0000] {load.py:30} INFO - Loaded 83 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-13T09:05:41.358+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T09:05:41.376+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T09:05:41.377+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T090536, end_date=20251013T090541
+[2025-10-13T09:05:41.429+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T09:05:41.456+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T09:05:41.459+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-13T09:15:17.800+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T09:15:17.822+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:15:17.832+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:15:17.833+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T09:15:17.846+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T09:15:17.854+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1185) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T09:15:17.855+0000] {standard_task_runner.py:72} INFO - Started process 1189 to run task
+[2025-10-13T09:15:17.856+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '160', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp95sal6em']
+[2025-10-13T09:15:17.857+0000] {standard_task_runner.py:105} INFO - Job 160: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T09:15:17.918+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T09:15:18.011+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T09:15:18.013+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T09:15:22.752+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-13T09:15:22.752+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T09:15:22.765+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T09:15:22.766+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T091517, end_date=20251013T091522
+[2025-10-13T09:15:22.808+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T09:15:22.818+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-13T09:20:34.205+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T09:20:34.234+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:20:34.247+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-13T09:20:34.248+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T09:20:34.266+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-13T09:20:34.275+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1284) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T09:20:34.277+0000] {standard_task_runner.py:72} INFO - Started process 1290 to run task
+[2025-10-13T09:20:34.278+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp7twnpv7b']
+[2025-10-13T09:20:34.280+0000] {standard_task_runner.py:105} INFO - Job 169: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-13T09:20:34.364+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T09:20:34.489+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-13T09:20:34.491+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T09:20:44.969+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-13T09:20:44.970+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T09:20:44.980+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T09:20:44.981+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251013T092034, end_date=20251013T092044
+[2025-10-13T09:20:45.022+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T09:20:45.044+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T09:20:45.046+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:15:41.919+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:15:41.941+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:15:41.952+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:15:41.952+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:15:41.966+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:15:41.974+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=125) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:15:41.976+0000] {standard_task_runner.py:72} INFO - Started process 128 to run task
+[2025-10-14T04:15:41.976+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '242', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpur581t0b']
+[2025-10-14T04:15:41.977+0000] {standard_task_runner.py:105} INFO - Job 242: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:15:42.041+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:15:42.134+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:15:42.135+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:15:47.247+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:15:47.247+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:15:47.260+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:15:47.260+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T041541, end_date=20251014T041547
+[2025-10-14T04:15:47.297+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:15:47.321+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:15:47.325+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:20:40.561+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:20:40.600+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:20:40.616+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:20:40.618+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:20:40.647+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:20:40.661+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=266) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:20:40.663+0000] {standard_task_runner.py:72} INFO - Started process 270 to run task
+[2025-10-14T04:20:40.664+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '265', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpeo36et7r']
+[2025-10-14T04:20:40.665+0000] {standard_task_runner.py:105} INFO - Job 265: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:20:40.745+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:20:40.839+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:20:40.840+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:20:45.342+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:20:45.343+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:20:45.354+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:20:45.355+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T042040, end_date=20251014T042045
+[2025-10-14T04:20:45.416+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:20:45.444+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:20:45.447+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:22:15.439+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:22:15.462+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:22:15.471+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:22:15.472+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:22:15.486+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:22:15.494+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=504) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:22:15.496+0000] {standard_task_runner.py:72} INFO - Started process 506 to run task
+[2025-10-14T04:22:15.497+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '323', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpk078wil5']
+[2025-10-14T04:22:15.498+0000] {standard_task_runner.py:105} INFO - Job 323: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:22:15.562+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:22:15.664+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:22:15.665+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:22:20.257+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:22:20.258+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:22:20.275+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:22:20.276+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T042215, end_date=20251014T042220
+[2025-10-14T04:22:20.326+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:22:20.350+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:22:20.352+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:26:08.745+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:26:08.769+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:26:08.782+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:26:08.782+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:26:08.801+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:26:08.810+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=646) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:26:08.812+0000] {standard_task_runner.py:72} INFO - Started process 655 to run task
+[2025-10-14T04:26:08.812+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '350', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpokrsjnq0']
+[2025-10-14T04:26:08.814+0000] {standard_task_runner.py:105} INFO - Job 350: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:26:08.877+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:26:08.995+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:26:08.997+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:26:14.800+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:26:14.801+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:26:14.814+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:26:14.815+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T042608, end_date=20251014T042614
+[2025-10-14T04:26:14.888+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:26:14.911+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:26:14.913+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:28:12.369+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:28:12.396+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:28:12.406+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:28:12.407+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:28:12.423+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:28:12.430+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=750) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:28:12.432+0000] {standard_task_runner.py:72} INFO - Started process 757 to run task
+[2025-10-14T04:28:12.433+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '371', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp126nu7kz']
+[2025-10-14T04:28:12.435+0000] {standard_task_runner.py:105} INFO - Job 371: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:28:12.502+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:28:12.604+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:28:12.605+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:28:18.114+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:28:18.114+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:28:18.126+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:28:18.127+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T042812, end_date=20251014T042818
+[2025-10-14T04:28:18.184+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:28:18.207+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:28:18.209+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:31:20.804+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:31:20.831+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:31:20.842+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [queued]>
+[2025-10-14T04:31:20.843+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:31:20.859+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_marketing_campaigns> on 2025-09-01 00:00:00+00:00
+[2025-10-14T04:31:20.868+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1051) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:31:20.870+0000] {standard_task_runner.py:72} INFO - Started process 1056 to run task
+[2025-10-14T04:31:20.870+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_marketing_campaigns', 'scheduled__2025-09-01T00:00:00+00:00', '--job-id', '443', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpiikc4b6v']
+[2025-10-14T04:31:20.871+0000] {standard_task_runner.py:105} INFO - Job 443: Subtask extract_load_group.load_marketing_campaigns
+[2025-10-14T04:31:20.942+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_marketing_campaigns scheduled__2025-09-01T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:31:21.083+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_marketing_campaigns' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T00:00:00+00:00'
+[2025-10-14T04:31:21.084+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:31:25.067+0000] {load.py:30} INFO - Loaded 67 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_marketing_campaigns
+[2025-10-14T04:31:25.069+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:31:25.085+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:31:25.086+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_marketing_campaigns, run_id=scheduled__2025-09-01T00:00:00+00:00, execution_date=20250901T000000, start_date=20251014T043120, end_date=20251014T043125
+[2025-10-14T04:31:25.140+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:31:25.170+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:31:25.172+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

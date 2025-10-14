@@ -1,0 +1,92 @@
+[2025-10-13T09:21:25.584+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T09:21:25.603+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-13T09:21:25.611+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-13T09:21:25.612+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T09:21:25.624+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): cleanup> on 2025-09-03 00:00:00+00:00
+[2025-10-13T09:21:25.631+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1395) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T09:21:25.633+0000] {standard_task_runner.py:72} INFO - Started process 1396 to run task
+[2025-10-13T09:21:25.633+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'cleanup', 'scheduled__2025-09-03T00:00:00+00:00', '--job-id', '196', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpl5pv0mlq']
+[2025-10-13T09:21:25.634+0000] {standard_task_runner.py:105} INFO - Job 196: Subtask cleanup
+[2025-10-13T09:21:25.683+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T09:21:25.769+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='cleanup' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T00:00:00+00:00'
+[2025-10-13T09:21:25.770+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T09:21:25.782+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2025-10-13T09:21:25.784+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'rm -rf /tmp/*.csv']
+[2025-10-13T09:21:25.795+0000] {subprocess.py:99} INFO - Output:
+[2025-10-13T09:21:25.799+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2025-10-13T09:21:25.827+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T09:21:25.827+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=cleanup, run_id=scheduled__2025-09-03T00:00:00+00:00, execution_date=20250903T000000, start_date=20251013T092125, end_date=20251013T092125
+[2025-10-13T09:21:25.848+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T09:21:25.869+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T09:21:25.871+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:21:18.315+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:21:18.336+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:21:18.348+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:21:18.348+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:21:18.367+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): cleanup> on 2025-09-03 00:00:00+00:00
+[2025-10-14T04:21:18.375+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=385) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:21:18.377+0000] {standard_task_runner.py:72} INFO - Started process 386 to run task
+[2025-10-14T04:21:18.377+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'cleanup', 'scheduled__2025-09-03T00:00:00+00:00', '--job-id', '292', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpbuzvbbbq']
+[2025-10-14T04:21:18.378+0000] {standard_task_runner.py:105} INFO - Job 292: Subtask cleanup
+[2025-10-14T04:21:18.433+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:21:18.528+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='cleanup' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T00:00:00+00:00'
+[2025-10-14T04:21:18.529+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:21:18.543+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2025-10-14T04:21:18.544+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'rm -rf /tmp/*.csv']
+[2025-10-14T04:21:18.556+0000] {subprocess.py:99} INFO - Output:
+[2025-10-14T04:21:18.560+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2025-10-14T04:21:18.592+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:21:18.593+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=cleanup, run_id=scheduled__2025-09-03T00:00:00+00:00, execution_date=20250903T000000, start_date=20251014T042118, end_date=20251014T042118
+[2025-10-14T04:21:18.633+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:21:18.658+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:21:18.660+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:29:10.430+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:29:10.450+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:29:10.459+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:29:10.460+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:29:10.480+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): cleanup> on 2025-09-03 00:00:00+00:00
+[2025-10-14T04:29:10.489+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=870) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:29:10.491+0000] {standard_task_runner.py:72} INFO - Started process 871 to run task
+[2025-10-14T04:29:10.491+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'cleanup', 'scheduled__2025-09-03T00:00:00+00:00', '--job-id', '400', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpl9r8lcwz']
+[2025-10-14T04:29:10.493+0000] {standard_task_runner.py:105} INFO - Job 400: Subtask cleanup
+[2025-10-14T04:29:10.572+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:29:10.660+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='cleanup' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T00:00:00+00:00'
+[2025-10-14T04:29:10.661+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:29:10.674+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2025-10-14T04:29:10.675+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'rm -rf /tmp/*.csv']
+[2025-10-14T04:29:10.685+0000] {subprocess.py:99} INFO - Output:
+[2025-10-14T04:29:10.689+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2025-10-14T04:29:10.715+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:29:10.715+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=cleanup, run_id=scheduled__2025-09-03T00:00:00+00:00, execution_date=20250903T000000, start_date=20251014T042910, end_date=20251014T042910
+[2025-10-14T04:29:10.747+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:29:10.774+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:29:10.776+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:36:06.156+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:36:06.175+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:36:06.183+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [queued]>
+[2025-10-14T04:36:06.184+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:36:06.196+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): cleanup> on 2025-09-03 00:00:00+00:00
+[2025-10-14T04:36:06.202+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1219) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:36:06.204+0000] {standard_task_runner.py:72} INFO - Started process 1220 to run task
+[2025-10-14T04:36:06.204+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'cleanup', 'scheduled__2025-09-03T00:00:00+00:00', '--job-id', '472', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp5hwy9zjg']
+[2025-10-14T04:36:06.205+0000] {standard_task_runner.py:105} INFO - Job 472: Subtask cleanup
+[2025-10-14T04:36:06.254+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.cleanup scheduled__2025-09-03T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:36:06.335+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='cleanup' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T00:00:00+00:00'
+[2025-10-14T04:36:06.336+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:36:06.349+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2025-10-14T04:36:06.350+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'rm -rf /tmp/*.csv']
+[2025-10-14T04:36:06.361+0000] {subprocess.py:99} INFO - Output:
+[2025-10-14T04:36:06.365+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2025-10-14T04:36:06.393+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:36:06.394+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=cleanup, run_id=scheduled__2025-09-03T00:00:00+00:00, execution_date=20250903T000000, start_date=20251014T043606, end_date=20251014T043606
+[2025-10-14T04:36:06.419+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:36:06.447+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:36:06.449+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

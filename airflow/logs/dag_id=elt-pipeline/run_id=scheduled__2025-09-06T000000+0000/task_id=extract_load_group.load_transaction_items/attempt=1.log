@@ -1,0 +1,62 @@
+[2025-10-13T09:22:07.507+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-13T09:22:07.530+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-13T09:22:07.540+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-13T09:22:07.540+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-13T09:22:07.557+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_transaction_items> on 2025-09-06 00:00:00+00:00
+[2025-10-13T09:22:07.565+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1502) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-13T09:22:07.567+0000] {standard_task_runner.py:72} INFO - Started process 1508 to run task
+[2025-10-13T09:22:07.567+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_transaction_items', 'scheduled__2025-09-06T00:00:00+00:00', '--job-id', '226', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp9_4x1b4z']
+[2025-10-13T09:22:07.568+0000] {standard_task_runner.py:105} INFO - Job 226: Subtask extract_load_group.load_transaction_items
+[2025-10-13T09:22:07.634+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [running]> on host 84d5a327cf64
+[2025-10-13T09:22:07.739+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_transaction_items' AIRFLOW_CTX_EXECUTION_DATE='2025-09-06T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-06T00:00:00+00:00'
+[2025-10-13T09:22:07.740+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-13T09:22:21.842+0000] {load.py:30} INFO - Loaded 2000 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_transaction_items
+[2025-10-13T09:22:21.842+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-13T09:22:21.853+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-13T09:22:21.854+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_transaction_items, run_id=scheduled__2025-09-06T00:00:00+00:00, execution_date=20250906T000000, start_date=20251013T092207, end_date=20251013T092221
+[2025-10-13T09:22:21.917+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-13T09:22:21.944+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-13T09:22:21.950+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:30:20.032+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:30:20.053+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-14T04:30:20.062+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-14T04:30:20.062+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:30:20.075+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_transaction_items> on 2025-09-06 00:00:00+00:00
+[2025-10-14T04:30:20.083+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=993) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:30:20.086+0000] {standard_task_runner.py:72} INFO - Started process 998 to run task
+[2025-10-14T04:30:20.091+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_transaction_items', 'scheduled__2025-09-06T00:00:00+00:00', '--job-id', '432', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpbbduaid6']
+[2025-10-14T04:30:20.092+0000] {standard_task_runner.py:105} INFO - Job 432: Subtask extract_load_group.load_transaction_items
+[2025-10-14T04:30:20.145+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:30:20.239+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_transaction_items' AIRFLOW_CTX_EXECUTION_DATE='2025-09-06T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-06T00:00:00+00:00'
+[2025-10-14T04:30:20.240+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:30:24.292+0000] {load.py:30} INFO - Loaded 2000 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_transaction_items
+[2025-10-14T04:30:24.293+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:30:24.304+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:30:24.304+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_transaction_items, run_id=scheduled__2025-09-06T00:00:00+00:00, execution_date=20250906T000000, start_date=20251014T043020, end_date=20251014T043024
+[2025-10-14T04:30:24.358+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:30:24.383+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:30:24.385+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:37:15.188+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:37:15.214+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-14T04:37:15.229+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [queued]>
+[2025-10-14T04:37:15.230+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:37:15.247+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_load_group.load_transaction_items> on 2025-09-06 00:00:00+00:00
+[2025-10-14T04:37:15.255+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1346) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:37:15.257+0000] {standard_task_runner.py:72} INFO - Started process 1353 to run task
+[2025-10-14T04:37:15.257+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'extract_load_group.load_transaction_items', 'scheduled__2025-09-06T00:00:00+00:00', '--job-id', '506', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpj0ayqmss']
+[2025-10-14T04:37:15.258+0000] {standard_task_runner.py:105} INFO - Job 506: Subtask extract_load_group.load_transaction_items
+[2025-10-14T04:37:15.328+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.extract_load_group.load_transaction_items scheduled__2025-09-06T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:37:15.437+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='extract_load_group.load_transaction_items' AIRFLOW_CTX_EXECUTION_DATE='2025-09-06T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-06T00:00:00+00:00'
+[2025-10-14T04:37:15.438+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:37:19.776+0000] {load.py:30} INFO - Loaded 2000 rows and 5 columns to gcpl-469311.datalabs_techtest.stg_transaction_items
+[2025-10-14T04:37:19.776+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:37:19.790+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:37:19.791+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=extract_load_group.load_transaction_items, run_id=scheduled__2025-09-06T00:00:00+00:00, execution_date=20250906T000000, start_date=20251014T043715, end_date=20251014T043719
+[2025-10-14T04:37:19.854+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:37:19.866+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

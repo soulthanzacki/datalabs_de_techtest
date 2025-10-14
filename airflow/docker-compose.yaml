@@ -1,6 +1,6 @@
 x-airflow-common:
   &airflow-common
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:latest}
+  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:latest-python3.10}
   env_file:
     - .env
   environment:
@@ -42,30 +42,30 @@ x-airflow-common:
 
 services:
   postgres:
-    image: postgres:16
+    image: postgres:17
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
-    networks:
-    - maindb_network
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s
       retries: 5
       start_period: 5s
     restart: always
+    networks:
+      - maindb_network
 
   redis:
     # Redis is limited to 7.2-bookworm due to licencing change
     # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
     image: redis:7.2-bookworm
-    networks:
-    - maindb_network
     expose:
       - 6379
+    networks:
+    - maindb_network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -73,6 +73,7 @@ services:
       retries: 50
       start_period: 30s
     restart: always
+    
 
   airflow-webserver:
     <<: *airflow-common
@@ -101,6 +102,8 @@ services:
       retries: 5
       start_period: 30s
     restart: always
+    networks:
+    - maindb_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:

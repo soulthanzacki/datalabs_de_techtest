@@ -1,0 +1,9 @@
+{
+  "tables": [
+    { "name": "customers", "date": "signup_date" },
+    { "name": "products" },
+    { "name": "transactions", "date": "transaction_date" },
+    { "name": "transaction_items" },
+    { "name": "marketing_campaigns", "date": "start_date" }
+  ]
+}

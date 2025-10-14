@@ -1,0 +1,462 @@
+[2025-10-14T04:21:48.618+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:21:48.641+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:21:48.651+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:21:48.652+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:21:48.670+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform> on 2025-09-05 00:00:00+00:00
+[2025-10-14T04:21:48.677+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=482) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:21:48.679+0000] {standard_task_runner.py:72} INFO - Started process 483 to run task
+[2025-10-14T04:21:48.679+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'transform', 'scheduled__2025-09-05T00:00:00+00:00', '--job-id', '317', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmpymhg5o5u']
+[2025-10-14T04:21:48.680+0000] {standard_task_runner.py:105} INFO - Job 317: Subtask transform
+[2025-10-14T04:21:48.732+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:21:48.824+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T00:00:00+00:00'
+[2025-10-14T04:21:48.825+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:21:49.530+0000] {transform.py:140} INFO - Executing dwh_ddl.sql query:
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.fact_sales (
+        transaction_id INT64,
+        customer_id INT64,
+        product_id INT64,
+        quantity INT64,
+        price FLOAT
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_customers (
+        customer_id STRING,
+        name STRING,
+        email STRING,
+        city STRING,
+        signup_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_products (
+        product_id INT64,
+        product_name STRING,
+        category STRING,
+        price FLOAT64,
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_dates (
+        transaction_id INT64,
+        transaction_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_campaigns (
+        campaign_id INT64,
+        campaign_name STRING,
+        start_date DATE,
+        end_date DATE,
+        channel STRING
+    );
+[2025-10-14T04:21:50.880+0000] {transform.py:170} ERROR - General error occurred: 400 GET https://bigquery.googleapis.com/bigquery/v2/projects/gcpl-469311/queries/a919e178-d0fa-4a5c-b720-f196b1694f81?maxResults=0&location=asia-southeast2&prettyPrint=false: Query error: Type not found: FLOAT at [6:15]
+
+Location: asia-southeast2
+Job ID: a919e178-d0fa-4a5c-b720-f196b1694f81
+Traceback (most recent call last):
+  File "/opt/airflow/dags/scripts/transform.py", line 144, in transform
+    job.result()
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1681, in result
+    while not is_job_done():
+              ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1650, in is_job_done
+    self._reload_query_results(retry=retry, **reload_query_results_kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1448, in _reload_query_results
+    self._query_results = self._client._get_query_results(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 2034, in _get_query_results
+    resource = self._call_api(
+               ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/client.py", line 843, in _call_api
+    return call()
+           ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/_http/__init__.py", line 494, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 GET https://bigquery.googleapis.com/bigquery/v2/projects/gcpl-469311/queries/a919e178-d0fa-4a5c-b720-f196b1694f81?maxResults=0&location=asia-southeast2&prettyPrint=false: Query error: Type not found: FLOAT at [6:15]
+
+Location: asia-southeast2
+Job ID: a919e178-d0fa-4a5c-b720-f196b1694f81
+
+[2025-10-14T04:21:50.888+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:21:50.901+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:21:50.902+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=transform, run_id=scheduled__2025-09-05T00:00:00+00:00, execution_date=20250905T000000, start_date=20251014T042148, end_date=20251014T042150
+[2025-10-14T04:21:50.942+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:21:50.962+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:21:50.964+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:30:00.902+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:30:00.921+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:30:00.930+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:30:00.931+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:30:00.945+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform> on 2025-09-05 00:00:00+00:00
+[2025-10-14T04:30:00.953+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=974) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:30:00.955+0000] {standard_task_runner.py:72} INFO - Started process 975 to run task
+[2025-10-14T04:30:00.955+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'transform', 'scheduled__2025-09-05T00:00:00+00:00', '--job-id', '425', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmppux0dh39']
+[2025-10-14T04:30:00.957+0000] {standard_task_runner.py:105} INFO - Job 425: Subtask transform
+[2025-10-14T04:30:01.022+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:30:01.109+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T00:00:00+00:00'
+[2025-10-14T04:30:01.110+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:30:01.882+0000] {transform.py:140} INFO - Executing dwh_ddl.sql query:
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.fact_sales (
+        transaction_id INT64,
+        customer_id INT64,
+        product_id INT64,
+        quantity INT64,
+        price FLOAT64
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_customers (
+        customer_id INT64,
+        name STRING,
+        email STRING,
+        city STRING,
+        signup_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_products (
+        product_id INT64,
+        product_name STRING,
+        category STRING,
+        price FLOAT64,
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_dates (
+        transaction_id INT64,
+        transaction_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_campaigns (
+        campaign_id INT64,
+        campaign_name STRING,
+        start_date DATE,
+        end_date DATE,
+        channel STRING
+    );
+[2025-10-14T04:30:04.587+0000] {transform.py:148} INFO - query executed successfully.
+[2025-10-14T04:30:04.588+0000] {transform.py:159} INFO - Executing fact_sales query:
+
+    INSERT INTO gcpl-469311.datalabs_techtest.fact_sales 
+        (transaction_id, customer_id, product_id, quantity, price)
+    SELECT 
+        t.transaction_id,
+        t.customer_id,
+        ti.product_id,
+        ti.quantity,
+        ti.price
+    FROM gcpl-469311.datalabs_techtest.stg_transactions t 
+    JOIN gcpl-469311.datalabs_techtest.stg_transaction_items ti ON t.transaction_id = ti.transaction_id
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM gcpl-469311.datalabs_techtest.fact_sales AS target
+        WHERE target.transaction_id = t.transaction_id
+        AND target.customer_id = t.customer_id
+        AND target.product_id = ti.product_id
+        AND target.quantity = ti.quantity
+        AND target.price = ti.price
+    );
+    
+[2025-10-14T04:30:06.232+0000] {transform.py:167} INFO - fact_sales query executed successfully.
+[2025-10-14T04:30:06.232+0000] {transform.py:159} INFO - Executing dim_customers query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_customers AS target
+    USING (
+        SELECT
+        c.customer_id ,
+        c.name ,
+        c.email ,
+        c.city ,
+        c.signup_date ,
+    FROM gcpl-469311.datalabs_techtest.stg_customers c
+    ) AS source
+    ON target.customer_id = source.customer_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.name = source.name,
+        target.email = source.email,
+        target.city = source.city,
+        target.signup_date = source.signup_date
+
+    WHEN NOT MATCHED THEN
+    INSERT (customer_id, name, email, city, signup_date)
+    VALUES (source.customer_id, source.name, source.email, source.city, source.signup_date)
+    ;
+    
+[2025-10-14T04:30:07.962+0000] {transform.py:167} INFO - dim_customers query executed successfully.
+[2025-10-14T04:30:07.963+0000] {transform.py:159} INFO - Executing dim_products query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_products AS target
+    USING (
+        SELECT
+            p.product_id ,
+            p.product_name ,
+            p.category ,
+            p.price
+        FROM gcpl-469311.datalabs_techtest.stg_products p
+    ) AS source
+    ON target.product_id = source.product_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.product_name = source.product_name,
+        target.category = source.category,
+        target.price = source.price
+
+    WHEN NOT MATCHED THEN
+    INSERT (product_id, product_name, category, price)
+    VALUES (source.product_id, source.product_name, source.category, source.price)
+    ;
+    
+[2025-10-14T04:30:09.785+0000] {transform.py:167} INFO - dim_products query executed successfully.
+[2025-10-14T04:30:09.786+0000] {transform.py:159} INFO - Executing dim_dates query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_dates AS target
+    USING (
+        SELECT
+            t.transaction_id ,
+            t.transaction_date
+        FROM gcpl-469311.datalabs_techtest.stg_transactions t
+    ) AS source
+    ON target.transaction_id = source.transaction_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.transaction_date = source.transaction_date
+
+    WHEN NOT MATCHED THEN
+    INSERT (transaction_id, transaction_date)
+    VALUES (source.transaction_id, source.transaction_date);
+    
+[2025-10-14T04:30:11.566+0000] {transform.py:167} INFO - dim_dates query executed successfully.
+[2025-10-14T04:30:11.567+0000] {transform.py:159} INFO - Executing dim_campaigns query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_campaigns AS target
+    USING (
+        SELECT
+            mc.campaign_id ,
+            mc.campaign_name ,
+            mc.start_date ,
+            mc.end_date ,
+            mc.channel
+        FROM gcpl-469311.datalabs_techtest.stg_marketing_campaigns mc
+    ) AS source
+
+    ON target.campaign_id = source.campaign_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.campaign_name = source.campaign_name ,
+        target.start_date = source.start_date ,
+        target.end_date = source.end_date ,
+        target.channel = source.channel
+
+    WHEN NOT MATCHED THEN
+    INSERT (campaign_id, campaign_name, start_date, end_date, channel)
+    VALUES (source.campaign_id, source.campaign_name, source.start_date, source.end_date, source.channel);
+    
+[2025-10-14T04:30:13.654+0000] {transform.py:167} INFO - dim_campaigns query executed successfully.
+[2025-10-14T04:30:13.655+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:30:13.668+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:30:13.668+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=transform, run_id=scheduled__2025-09-05T00:00:00+00:00, execution_date=20250905T000000, start_date=20251014T043000, end_date=20251014T043013
+[2025-10-14T04:30:13.708+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:30:13.727+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:30:13.729+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-10-14T04:36:57.605+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-10-14T04:36:57.625+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:36:57.634+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [queued]>
+[2025-10-14T04:36:57.635+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-10-14T04:36:57.650+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform> on 2025-09-05 00:00:00+00:00
+[2025-10-14T04:36:57.659+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'elt-pipeline', 'transform', 'scheduled__2025-09-05T00:00:00+00:00', '--job-id', '497', '--raw', '--subdir', 'DAGS_FOLDER/elt.py', '--cfg-path', '/tmp/tmp61pnx3bu']
+[2025-10-14T04:36:57.658+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1323) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-10-14T04:36:57.660+0000] {standard_task_runner.py:105} INFO - Job 497: Subtask transform
+[2025-10-14T04:36:57.661+0000] {standard_task_runner.py:72} INFO - Started process 1324 to run task
+[2025-10-14T04:36:57.708+0000] {task_command.py:467} INFO - Running <TaskInstance: elt-pipeline.transform scheduled__2025-09-05T00:00:00+00:00 [running]> on host e348b991e0be
+[2025-10-14T04:36:57.791+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='elt-pipeline' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T00:00:00+00:00'
+[2025-10-14T04:36:57.792+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-10-14T04:36:58.491+0000] {transform.py:140} INFO - Executing dwh_ddl.sql query:
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.fact_sales (
+        transaction_id INT64,
+        customer_id INT64,
+        product_id INT64,
+        quantity INT64,
+        price FLOAT64
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_customers (
+        customer_id INT64,
+        name STRING,
+        email STRING,
+        city STRING,
+        signup_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_products (
+        product_id INT64,
+        product_name STRING,
+        category STRING,
+        price FLOAT64,
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_dates (
+        transaction_id INT64,
+        transaction_date DATE
+    );
+
+CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_campaigns (
+        campaign_id INT64,
+        campaign_name STRING,
+        start_date DATE,
+        end_date DATE,
+        channel STRING
+    );
+[2025-10-14T04:37:01.014+0000] {transform.py:148} INFO - query executed successfully.
+[2025-10-14T04:37:01.015+0000] {transform.py:159} INFO - Executing fact_sales query:
+
+    INSERT INTO gcpl-469311.datalabs_techtest.fact_sales 
+        (transaction_id, customer_id, product_id, quantity, price)
+    SELECT 
+        t.transaction_id,
+        t.customer_id,
+        ti.product_id,
+        ti.quantity,
+        ti.price
+    FROM gcpl-469311.datalabs_techtest.stg_transactions t 
+    JOIN gcpl-469311.datalabs_techtest.stg_transaction_items ti ON t.transaction_id = ti.transaction_id
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM gcpl-469311.datalabs_techtest.fact_sales AS target
+        WHERE target.transaction_id = t.transaction_id
+        AND target.customer_id = t.customer_id
+        AND target.product_id = ti.product_id
+        AND target.quantity = ti.quantity
+        AND target.price = ti.price
+    );
+    
+[2025-10-14T04:37:02.747+0000] {transform.py:167} INFO - fact_sales query executed successfully.
+[2025-10-14T04:37:02.748+0000] {transform.py:159} INFO - Executing dim_customers query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_customers AS target
+    USING (
+        SELECT
+        c.customer_id ,
+        c.name ,
+        c.email ,
+        c.city ,
+        c.signup_date ,
+    FROM gcpl-469311.datalabs_techtest.stg_customers c
+    ) AS source
+    ON target.customer_id = source.customer_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.name = source.name,
+        target.email = source.email,
+        target.city = source.city,
+        target.signup_date = source.signup_date
+
+    WHEN NOT MATCHED THEN
+    INSERT (customer_id, name, email, city, signup_date)
+    VALUES (source.customer_id, source.name, source.email, source.city, source.signup_date)
+    ;
+    
+[2025-10-14T04:37:04.440+0000] {transform.py:167} INFO - dim_customers query executed successfully.
+[2025-10-14T04:37:04.441+0000] {transform.py:159} INFO - Executing dim_products query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_products AS target
+    USING (
+        SELECT
+            p.product_id ,
+            p.product_name ,
+            p.category ,
+            p.price
+        FROM gcpl-469311.datalabs_techtest.stg_products p
+    ) AS source
+    ON target.product_id = source.product_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.product_name = source.product_name,
+        target.category = source.category,
+        target.price = source.price
+
+    WHEN NOT MATCHED THEN
+    INSERT (product_id, product_name, category, price)
+    VALUES (source.product_id, source.product_name, source.category, source.price)
+    ;
+    
+[2025-10-14T04:37:06.726+0000] {transform.py:167} INFO - dim_products query executed successfully.
+[2025-10-14T04:37:06.727+0000] {transform.py:159} INFO - Executing dim_dates query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_dates AS target
+    USING (
+        SELECT
+            t.transaction_id ,
+            t.transaction_date
+        FROM gcpl-469311.datalabs_techtest.stg_transactions t
+    ) AS source
+    ON target.transaction_id = source.transaction_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.transaction_date = source.transaction_date
+
+    WHEN NOT MATCHED THEN
+    INSERT (transaction_id, transaction_date)
+    VALUES (source.transaction_id, source.transaction_date);
+    
+[2025-10-14T04:37:08.443+0000] {transform.py:167} INFO - dim_dates query executed successfully.
+[2025-10-14T04:37:08.444+0000] {transform.py:159} INFO - Executing dim_campaigns query:
+
+    MERGE INTO gcpl-469311.datalabs_techtest.dim_campaigns AS target
+    USING (
+        SELECT
+            mc.campaign_id ,
+            mc.campaign_name ,
+            mc.start_date ,
+            mc.end_date ,
+            mc.channel
+        FROM gcpl-469311.datalabs_techtest.stg_marketing_campaigns mc
+    ) AS source
+
+    ON target.campaign_id = source.campaign_id
+
+    WHEN MATCHED THEN
+    UPDATE SET
+        target.campaign_name = source.campaign_name ,
+        target.start_date = source.start_date ,
+        target.end_date = source.end_date ,
+        target.channel = source.channel
+
+    WHEN NOT MATCHED THEN
+    INSERT (campaign_id, campaign_name, start_date, end_date, channel)
+    VALUES (source.campaign_id, source.campaign_name, source.start_date, source.end_date, source.channel);
+    
+[2025-10-14T04:37:10.157+0000] {transform.py:167} INFO - dim_campaigns query executed successfully.
+[2025-10-14T04:37:10.158+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-10-14T04:37:10.170+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-10-14T04:37:10.171+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=elt-pipeline, task_id=transform, run_id=scheduled__2025-09-05T00:00:00+00:00, execution_date=20250905T000000, start_date=20251014T043657, end_date=20251014T043710
+[2025-10-14T04:37:10.206+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-10-14T04:37:10.223+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-14T04:37:10.225+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,2 +1,6 @@
 de_techtest.pdf
+archive
 postgres/sample_data
+airflow/config/credentials.json
+airflow/dags/__pycache__
+airflow/dags/scripts/__pycache__
