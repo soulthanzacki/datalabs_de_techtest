@@ -1,3 +1,63 @@
 # Datalabs Data Engineering Technical Test
 
-This is Initial README for Datalabs DE Techtest. 
+<img src='assets/datapipe_architecture.jpg'>
+
+## Overview
+
+This project was developed as Technical Test for the Data Engineering Position at datalabs.id. It demonstrates the design and implementation of an end-to-end data pipeline, focusing on data ingestion, transformation, and warehouse modeling using modern data engineering tools.
+
+The pipeline simulates a real-world scenario where transactional data is generated, processed, and analyzed through various stages — from raw data ingestion to a dimensional data warehouse structure.
+
+The project is divided into three core tasks:
+- **Extracting data** from a local **PostgreSQL database**.
+- **Ingesting/Loading data** to **Google Bigquery** as data warehouse for further data transformation.
+- **Transforming data** into a star schema consisting of **fact and dimension tables**.
+
+## Tools
+
+### **Docker** – Containerized services such as Airflow and PostgreSQL.
+
+There are two separate Docker Compose files created in this project, as described below:
+
+ 1. **'airflow'** - Handles the orchestration and scheduling of data pipelines.
+ 2. **'postgres'** - Acts as the local database for data extraction.
+
+ Both services are built separately to simulate a real-world scenario where each tool runs on a different machine or environment. They are connected through a **Docker Networks** named **'maindb_network'**, which enables communication between the containers.
+ Since the network is hosted by the PostgreSQL service, it must be started **before** the Airflow service.
+
+To launch all Docker Compose services at once, go to the project directory and execute these commands in the given order:
+ ```bash
+docker compose -f postgres/docker-compose.yaml up -d
+docker compose -f airflow/docker-compose.yaml up -d
+```
+
+To stop and remove all running Docker Compose services, navigate to the project directory and execute the following command:
+ ```bash
+docker compose -f airflow/docker-compose.yaml down
+docker compose -f postgres/docker-compose.yaml down
+```
+
+### **Apache Airflow** – Workflow orchestration for automated data pipelines.
+
+Once all Docker services are up and running, you can access the **Airflow Webserver** through your web browser at **'localhost:8080'**.
+
+When prompted for credentials, use the username and password defined in the **Airflow** **'docker-compose.yaml'** file.
+By default, they are set as:
+
+- Username: **'airflow'**
+- Password: **'airflow'**
+
+After logging in, you’ll land on the **Airflow Dashboard**, where you can see all available **DAGs** ready to be executed, as shown below:
+
+<img src='assets/DAGs.png'>
+
+To **run a DAG**, you can either:
+- Click the **“Run”** button in the **Action** column (on the right side), or
+- Toggle the **switch button** to the left of the DAG name.
+Similarly, to **pause or stop** a DAG, simply click the **same toggle** button on the left side of its name.
+
+You can **monitor DAGs** by clicking on a DAG name and selecting a specific **run instance** to view detailed logs and task progress.
+
+- **PostgreSQL** – Local database used as the data source. 
+- **Google BigQuery** – Cloud data warehouse for transformed and analytical-ready data.
+
