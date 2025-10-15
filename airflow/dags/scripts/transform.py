@@ -3,7 +3,7 @@ import logging
 def fact_sales():
     return """
     INSERT INTO gcpl-469311.datalabs_techtest.fact_sales 
-        (transaction_id, customer_id, product_id, quantity, price)
+        (transaction_id, customer_id, product_id, quantity, total_price)
     SELECT 
         t.transaction_id,
         t.customer_id,
@@ -19,7 +19,7 @@ def fact_sales():
         AND target.customer_id = t.customer_id
         AND target.product_id = ti.product_id
         AND target.quantity = ti.quantity
-        AND target.price = ti.price
+        AND target.total_price = ti.price
     );
     """
 

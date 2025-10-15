@@ -86,6 +86,7 @@ The transformation process creates one **fact table** and several **dimension ta
 - dim_products
 - dim_dates
 - dim_campaigns
+
 Below is the **Entity Relationship Diagram (ERD)** that illustrates the relationship between the fact and dimension tables:
 
-<img src=''>
+<img src='assets/ERD.png'>

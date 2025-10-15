@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.fact_sales (
         customer_id INT64,
         product_id INT64,
         quantity INT64,
-        price FLOAT64
+        total_price FLOAT64
     );
 
 CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_customers (
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_products (
         product_id INT64,
         product_name STRING,
         category STRING,
-        price FLOAT64,
+        price FLOAT64
     );
 
 CREATE TABLE IF NOT EXISTS gcpl-469311.datalabs_techtest.dim_dates (
