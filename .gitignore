@@ -1,6 +1,8 @@
 de_techtest.pdf
 postgres/sample_data
 airflow/logs
-airflow/config/credentials.json
+airflow/config/bq-credential.json
+airflow/config/pub-credential.json
+airflow/config/sub-credential.json
 airflow/dags/__pycache__
 airflow/dags/scripts/__pycache__

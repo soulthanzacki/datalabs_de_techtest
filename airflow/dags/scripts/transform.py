@@ -126,7 +126,7 @@ def transform(**kwargs):
     import os
     from google.cloud import bigquery
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/opt/airflow/config/credentials.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/opt/airflow/config/bq-credential.json"
 
     client = bigquery.Client()
 

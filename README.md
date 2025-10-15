@@ -1,17 +1,21 @@
 # Datalabs Data Engineering Technical Test
-
+### Batch
 <img src='assets/datapipe_architecture.jpg'>
+
+### Streaming
+<img src='assets/stream_architecture..png'>
 
 ## Overview
 
 This project was developed as Technical Test for the Data Engineering Position at datalabs.id. It demonstrates the design and implementation of an end-to-end data pipeline, focusing on data ingestion, transformation, and warehouse modeling using modern data engineering tools.
 
-The pipeline simulates a real-world scenario where transactional data is generated, processed, and analyzed through various stages — from raw data ingestion to a dimensional data warehouse structure.
+The pipeline simulates a real-world scenario where transactional data is generated, processed, and analyzed through various stages, from raw data ingestion to a dimensional data warehouse structure.
 
-The project is divided into three core tasks:
+The project is divided into three core tasks and one Additional task:
 - **Extracting data** from a local **PostgreSQL database**.
 - **Ingesting/Loading data** to **Google Bigquery** as data warehouse for further data transformation.
 - **Transforming data** into a star schema consisting of **fact and dimension tables**.
+- **Additional - Stream** event-based data to **Google Cloud Pub/Sub** for real-time processing.
 
 ## Tools
 
@@ -90,3 +94,31 @@ The transformation process creates one **fact table** and several **dimension ta
 Below is the **Entity Relationship Diagram (ERD)** that illustrates the relationship between the fact and dimension tables:
 
 <img src='assets/ERD.png'>
+
+I chose this model to focus the analytical process around the **`fact_sales`** table, which serves as the central **fact table** containing the main transactional data derived from the staging tables **`transactions`** and **`transaction_items`**.
+The selected columns represent key quantitative and relational attributes that support sales performance analysis:
+
+**`transaction_id`** – Serves as a unique identifier for each transaction and links to the date dimension (**`dim_dates`**).
+
+**`customer_id`** – Connects each transaction to customer information in **`dim_customers`**, enabling behavioral and segmentation analysis.
+
+**`product_id`** – Links transactions to product details in **`dim_products`**, supporting product-level performance analysis.
+
+**`quantity`** – Indicates the number of products purchased in each transaction, representing sales volume.
+
+**`total_price`** – Represents the total transaction value (quantity × price), used for revenue and financial performance metrics.
+
+The dimension tables (**`dim_customers`**, **`dim_products`**, **`dim_dates`**, and **`dim_campaigns`**) act as **supporting structures** that provide additional descriptive context for analytical purposes, allowing flexible exploration of sales data by customer, product, time, and campaign dimensions.
+
+### **Google Pub/Sub** – Cloud-based messaging service for real-time data streaming and event-driven communication.
+
+This additional task demonstrates a **real-time data streaming pipeline** using **Google Pub/Sub** and **Python**.
+It simulates how event-driven data can be ingested, processed, and aggregated continuously outside the batch ETL flow.
+
+**Workflow Overview**
+
+1. **Python Producer** generates **dummy event-based data** (simulating transaction events).
+2. These events are **published** to a **Pub/Sub topic** in **real time**.
+3. **Pub/Sub** acts as the message streaming layer, ensuring reliable delivery of event data.
+4. **A Python Subscriber** listens to the subscribed topic, **pulls messages**, and performs a 1-minute aggregation to count the total number of transactions received within that window.
+5. The aggregated result is then **logged**.
