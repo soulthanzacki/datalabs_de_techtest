@@ -1,6 +1,6 @@
 # Datalabs Data Engineering Technical Test
 ### Batch
-<img src='assets/datapipe_architecture.jpg'>
+<img src='assets/batch_architecture.jpg'>
 
 ### Streaming
 <img src='assets/stream_architecture..png'>
